@@ -27,7 +27,7 @@ county_list = ['Adams', 'Alexander', 'Bond', 'Boone', 'Brown', 'Bureau', 'Calhou
 county_list = [element + '_County' for element in county_list]
 
 
-def schoolSearch():
+def schoolsearch():
     for county in county_list:
         county_span = soup.find('span', {'id': county})
         county_ul = county_span.parent.find_next_sibling()
@@ -36,7 +36,7 @@ def schoolSearch():
             school_list.extend([school])
 
 
-def saveToFile():
+def savetofile():
     with open('schools.csv', 'wb') as results:
         wr = csv.writer(results, dialect='excel')
         wr.writerow(['School Name', 'City'])
@@ -45,5 +45,5 @@ def saveToFile():
     print 'The list has been printed to schools.csv'
 
 
-schoolSearch()
-saveToFile()
+schoolsearch()
+savetofile()
