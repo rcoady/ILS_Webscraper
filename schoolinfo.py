@@ -5,8 +5,8 @@ import requests
 school_info = []
 
 # This is for testing purposes, eventually will be a list
-school_url = "https://en.wikipedia.org/wiki/Christ_Lutheran_High_School"
-# school_url = "https://en.wikipedia.org/wiki/Annawan_High_School"
+# school_url = "https://en.wikipedia.org/wiki/Christ_Lutheran_High_School"
+school_url = "https://en.wikipedia.org/wiki/Annawan_High_School"
 r = requests.get(school_url)
 soup = BeautifulSoup(r.content, "html.parser")
 
@@ -15,7 +15,7 @@ name = soup.find('th', {'class': 'fn org'})
 address = soup.find('span', {'class': 'street-address'})
 city = soup.find('span', {'class': 'locality'})
 state = soup.find('span', {'class': 'region'})
-zip = soup.find('span', {'class': 'postal-code'})
+zip_code = soup.find('span', {'class': 'postal-code'})
 geo = soup.find('span', {'class': 'geo'})
 
 
@@ -58,8 +58,8 @@ def schoolstate():
 
 # Needs check to see if element is there
 def schoolzip():
-    if zip:
-        school_zip = zip
+    if zip_code:
+        school_zip = zip_code
         school_zip = school_zip.text.encode('utf-8')
         school_info.extend([school_zip])
     else:
@@ -72,10 +72,10 @@ def schoolgeo():
         school_geo = geo
         school_geo = school_geo.text.encode('utf-8')
         school_geo = school_geo.split(";")
-        lat = school_geo[0]
-        long = school_geo[1]
-        school_info.extend([lat])
-        school_info.extend([long])
+        latitude = school_geo[0]
+        longitude = school_geo[1]
+        school_info.extend([latitude])
+        school_info.extend([longitude])
     else:
         school_info.extend(["None found"])
 
